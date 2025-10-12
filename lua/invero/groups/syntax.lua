@@ -24,11 +24,11 @@ function M.get(C)
     -- diffs
     Added = { fg = C.green },
     Removed = { fg = C.red },
-    Changed = { fg = C.yellow },
+    Changed = { fg = C.orange },
 
     -- diagnostics
     DiagnosticInfo = { fg = C.blue },
-    DiagnosticWarn = { fg = C.yellow },
+    DiagnosticWarn = { fg = C.orange },
     DiagnosticError = { fg = C.red },
     DiagnosticDeprecated = { fg = C.magenta },
     DiagnosticUnderlineError = { fg = C.syntax, underline = true },

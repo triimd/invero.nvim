@@ -11,9 +11,9 @@ function M.get(C)
     Visual = { bg = C.accent_light },
     ColorColumn = { bg = C.surface },
 
-    Search = { fg = C.yellow },
-    CurSearch = { fg = C.yellow, bg = C.none, bold = true },
-    IncSearch = { fg = C.yellow, bg = C.none, bold = true },
+    Search = { fg = C.orange },
+    CurSearch = { fg = C.orange, bg = C.none, bold = true },
+    IncSearch = { fg = C.orange, bg = C.none, bold = true },
 
     MatchParen = { fg = C.accent, bg = C.accent_light, bold = true },
     EndOfBuffer = { fg = C.base }, -- End-of-buffer marker (~ lines)
