@@ -3,8 +3,21 @@ local M = {}
 
 function M.serialize(highlights)
   local buffer = { 'return {\n' }
-  for group, options in pairs(highlights) do
+
+  -- collect all group names
+  local groups = {}
+  for group in pairs(highlights) do
+    table.insert(groups, group)
+  end
+
+  -- sort alphabetically
+  table.sort(groups)
+
+  -- now iterate in order
+  for _, group in ipairs(groups) do
+    local options = highlights[group]
     table.insert(buffer, string.format('  [%q] = {', group))
+
     for k_opt, v_opt in pairs(options) do
       if type(v_opt) == 'string' then
         table.insert(buffer, string.format(' %s=%q,', k_opt, v_opt))
@@ -14,8 +27,10 @@ function M.serialize(highlights)
         table.insert(buffer, string.format(' %s=%s,', k_opt, v_opt))
       end
     end
+
     table.insert(buffer, ' },\n')
   end
+
   table.insert(buffer, '}\n')
   return table.concat(buffer)
 end
@@ -39,7 +54,9 @@ function M.build_cache(G)
 end
 
 function M.rebuild_cache(G)
-  os.remove(G.cache_path)
+  for variant, _ in pairs(G.variants) do
+    os.remove(vim.fs.joinpath(G.cache_dir, variant))
+  end
   return M.build_cache(G)
 end
 

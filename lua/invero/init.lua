@@ -14,7 +14,7 @@ local M = {
     },
   },
   theme_name = 'invero',
-  cache_dir = vim.fn.stdpath('cache') .. '/invero',
+  cache_dir = vim.fs.joinpath(vim.fn.stdpath('cache'), '/invero'),
   variants = { day = 1, night = 2 },
 }
 
@@ -27,14 +27,13 @@ function M.load(options)
   M.variant = S.get_style_variant(M, M.options.variant)
   M.cache_path = S.get_cache_path(M)
 
-  S.reset_theme(M)
-
-  local highlights = S.read_from_cache(M)
-  S.apply_highlights(highlights)
+  S.apply_highlights(M)
 end
 
+-- rebuild only uses setup() options
 function M.rebuild()
-  require('invero.lib.cache').rebuild_cache(M)
+  local highlights = require('invero.lib.cache').rebuild_cache(M)
+  S.apply_highlights(M, highlights)
 end
 
 return M

@@ -38,7 +38,13 @@ function M.reset_theme(G)
   vim.g.colors_name = G.theme_name
 end
 
-function M.apply_highlights(highlights)
+function M.apply_highlights(G, highlights)
+  M.reset_theme(G)
+
+  if not highlights then
+    highlights = M.read_from_cache(G)
+  end
+
   for group, definition in pairs(highlights) do
     vim.api.nvim_set_hl(0, group, definition)
   end

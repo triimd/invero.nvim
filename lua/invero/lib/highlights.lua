@@ -24,7 +24,7 @@ local function generate_256_palette()
   return palette
 end
 
-function M.gen_color_helper()
+function M.gen_color_tool()
   local palette_256 = generate_256_palette()
 
   return function(index, hex)
@@ -59,10 +59,11 @@ end
 
 local function get_variant_colors(G)
   local color_set = require('invero.colors.' .. G.variant)
-  local color_helper = M.gen_color_helper()
-  local palette = color_set.get_palette(color_helper)
+  local color_tool = M.gen_color_tool()
+  local palette = color_set.get_palette(color_tool)
   local semantic_colors = color_set.get_colors(palette)
-  return U.merge(palette, semantic_colors)
+
+  return U.merge(palette, semantic_colors), color_tool
 end
 
 local function normalize_highlight_groups(groups)
@@ -87,10 +88,15 @@ function M.generate_highlights(G)
   local highlights = {}
 
   local modules = get_theme_modules(G)
-  local colors = get_variant_colors(G)
+  local colors, color_tool = get_variant_colors(G)
   for _, module in ipairs(modules) do
     local groups = module.get(colors)
     highlights = U.merge(highlights, groups)
+  end
+
+  if G.options.highlights then
+    local custom_highlights = G.options.highlights(colors, color_tool)
+    highlights = U.merge(highlights, custom_highlights)
   end
 
   local hl = normalize_highlight_groups(highlights)
