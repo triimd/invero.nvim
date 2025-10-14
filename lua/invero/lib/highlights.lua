@@ -70,13 +70,17 @@ local function normalize_highlight_groups(groups)
   local result = {}
   for group, opts in pairs(groups) do
     local hl = {}
-    for k, v in pairs(opts) do
-      if k == 'fg' then
-        hl.ctermfg, hl.fg = v.cterm, v.gui
-      elseif k == 'bg' then
-        hl.ctermbg, hl.bg = v.cterm, v.gui
-      else
-        hl[k] = v
+    if type(opts) == 'string' then
+      hl.link = opts
+    else
+      for k, v in pairs(opts) do
+        if k == 'fg' then
+          hl.ctermfg, hl.fg = v.cterm, v.gui
+        elseif k == 'bg' then
+          hl.ctermbg, hl.bg = v.cterm, v.gui
+        else
+          hl[k] = v
+        end
       end
     end
     result[group] = hl
