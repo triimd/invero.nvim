@@ -30,10 +30,10 @@ function M.load(options)
   S.apply_highlights(M)
 end
 
--- rebuild only uses setup() options
-function M.rebuild()
-  local highlights = require('invero.lib.cache').rebuild_cache(M)
-  S.apply_highlights(M, highlights)
+function M.invalidate_cache()
+  for variant, _ in pairs(M.variants) do
+    os.remove(vim.fs.joinpath(M.cache_dir, variant))
+  end
 end
 
 return M
