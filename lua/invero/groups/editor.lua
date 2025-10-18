@@ -1,36 +1,52 @@
 local M = {}
 
-function M.get(C)
+function M.get(c, opts)
+  local bg = opts.transparent and c.none or c.base
   return {
-    Normal = { fg = C.text, bg = C.none },
-    Directory = { fg = C.accent },
-    Question = { fg = C.text },
-    LineNr = { fg = C.muted },
-    CursorLineNr = { fg = C.accent, bold = true },
-    CursorLine = { bg = C.surface },
-    Visual = { bg = C.accent_light },
-    ColorColumn = { bg = C.surface },
+    -- Core editor
+    Normal = { fg = c.text, bg = bg },
+    NormalNC = { fg = c.text, bg = bg },
+    EndOfBuffer = { fg = c.base }, -- Filler lines (~)
+    ColorColumn = { bg = c.surface },
+    CursorLine = { bg = c.surface },
+    CursorLineNr = { fg = c.accent, bold = true },
+    LineNr = { fg = c.muted },
+    Visual = { bg = c.accent_light },
+    MatchParen = { fg = c.accent, bg = c.accent_light, bold = true },
 
-    Search = { fg = C.orange },
-    CurSearch = { fg = C.orange, bg = C.none, bold = true },
-    IncSearch = { fg = C.orange, bg = C.none, bold = true },
+    -- Search
+    Search = { fg = c.yellow },
+    IncSearch = { fg = c.yellow, bg = c.none, bold = true },
+    CurSearch = { fg = c.yellow, bg = c.none, bold = true },
 
-    MatchParen = { fg = C.accent, bg = C.accent_light, bold = true },
-    EndOfBuffer = { fg = C.base }, -- End-of-buffer marker (~ lines)
+    -- Floating windows
+    NormalFloat = { fg = c.text, bg = bg },
+    FloatBorder = { fg = c.outline, bg = bg },
+    FloatTitle = { fg = c.text, bold = true },
+    FloatShadow = { bg = c.none, blend = 0 },
+    FloatShadowThrough = { bg = c.none, blend = 0 },
 
-    WinSeparator = { fg = C.outline },
-    -- StatusLine = { fg = C.outline, bg = C.none }, -- Active statusline (where filename)
-    StatusLine = { fg = C.base, bg = C.outline, bold = false }, -- Active statusline (where filename)
-    StatusLineNC = { fg = C.base, bg = C.outline, bold = false }, -- Active statusline (where filename)
-    MsgArea = { fg = C.text, bg = C.none }, -- Command-line / message area
-    MsgSeparator = { fg = C.text, bg = C.surface }, -- Separator for messages
-    ModeMsg = { fg = C.text },
+    -- UI sections
+    Directory = { fg = c.accent },
+    Question = { fg = c.text },
+    Conceal = { fg = c.muted, italic = true },
 
-    TabLine = { fg = C.muted }, -- Unselected tab
-    TabLineSel = { fg = C.text, bold = true }, -- Selected tab
-    TabLineFill = { bg = C.none }, -- Empty space in the tabline
+    -- StatusLine = { fg = c.outline, bg = bg },
+    WinSeparator = { fg = c.outline, bg = c.outline },
+    StatusLine = { fg = c.base, bg = c.outline, bold = true },
+    StatusLineNC = { fg = c.surface, bg = c.outline },
+    MsgArea = { fg = c.text, bg = bg },
+    MsgSeparator = { fg = c.text, bg = c.outline_light },
 
-    Conceal = { fg = C.muted, italic = true },
+    TabLine = { fg = c.muted, bg = c.black },
+    TabLineSel = { fg = c.base, bg = c.black, bold = true },
+    TabLineFill = { bg = c.black },
+
+    -- Popups / menus
+    Pmenu = { fg = c.text, bg = bg },
+    PmenuSel = { fg = c.text, bg = c.accent_light },
+    PmenuSbar = { bg = c.surface },
+    PmenuThumb = { bg = c.outline },
   }
 end
 

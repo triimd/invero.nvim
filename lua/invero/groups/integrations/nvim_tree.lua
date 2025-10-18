@@ -1,11 +1,12 @@
 local M = {}
 
-function M.get(C)
+function M.get(c)
   return {
-    NvimTreeIndentMarker = { fg = C.accent },
-    NvimTreeFolderIcon = { fg = C.accent },
-    NvimTreeEmptyFolderName = { fg = C.accent, bold = true },
-    NvimTreeFileIcon = { fg = C.outline },
+    NvimTreeRootFolder = { fg = c.base, bg = c.outline, bold = true },
+    NvimTreeIndentMarker = { fg = c.outline_light },
+    NvimTreeFolderIcon = { fg = c.accent },
+    NvimTreeEmptyFolderName = { fg = c.accent, bold = true },
+    NvimTreeFileIcon = { fg = c.outline },
     NvimTreeCopiedHL = { undercurl = true },
   }
 end

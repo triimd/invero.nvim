@@ -11,8 +11,8 @@ function M.get(C)
     terminal_color_2 = { fg = C.green },
     terminal_color_10 = { fg = C.green },
 
-    terminal_color_3 = { fg = C.orange },
-    terminal_color_11 = { fg = C.orange },
+    terminal_color_3 = { fg = C.yellow },
+    terminal_color_11 = { fg = C.yellow },
 
     terminal_color_4 = { fg = C.blue },
     terminal_color_12 = { fg = C.blue },

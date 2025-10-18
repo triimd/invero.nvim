@@ -1,1 +1,1 @@
-require('invero').load({ style = 'day' })
+require('invero').load({ variant = 'day' })

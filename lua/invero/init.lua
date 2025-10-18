@@ -5,8 +5,9 @@ local M = {
     variant = 'auto',
     background = {
       light = 'day',
-      dark = 'night',
+      dark = 'day',
     },
+    transparent = false,
     integrations = {
       nvim_tree = true,
       telescope = true,
@@ -15,7 +16,7 @@ local M = {
   },
   theme_name = 'invero',
   cache_dir = vim.fs.joinpath(vim.fn.stdpath('cache'), '/invero'),
-  variants = { day = 1, night = 2 },
+  variants = { day = 1 },
 }
 
 function M.setup(options)
@@ -34,6 +35,13 @@ function M.invalidate_cache()
   for variant, _ in pairs(M.variants) do
     os.remove(vim.fs.joinpath(M.cache_dir, variant))
   end
+end
+
+function M.get_colors(options)
+  M.options = S.setup_extend(M, options)
+  M.variant = S.get_style_variant(M, M.options.variant)
+
+  return require('invero.lib.highlights').get_variant_colors(M)
 end
 
 return M

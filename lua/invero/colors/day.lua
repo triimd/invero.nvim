@@ -2,40 +2,35 @@ local M = {}
 
 function M.get_palette(c)
   return {
-    -- Base colors
-    black = c(238),
     red = c(196),
     green = c(35),
-    yellow = c(221),
+    yellow = c(166),
     blue = c(27),
-    magenta = c(125),
-    cyan = c(30),
+    magenta = c(60),
+    cyan = c(153),
+    black = c(238),
+    gray0 = c(245),
+    gray1 = c(247),
+    gray2 = c(249),
+    gray3 = c(253),
     white = c(255),
-
-    -- Extended
-    gray_dark = c(245),
-    gray = c(247),
-    gray_light = c(253),
-    orange = c(166),
-    orange_light = c(180),
-    yellow_light = c(180),
-    blue_light = c(153),
-    slate_indigo = c(60),
-
     none = c('NONE'),
   }
 end
 
-function M.get_colors(P)
+function M.get_colors(p)
   return {
-    base = P.white,
-    surface = P.gray_light,
-    outline = P.gray_dark,
-    text = P.black,
-    muted = P.gray,
-    accent = P.blue,
-    accent_light = P.blue_light,
-    syntax = P.slate_indigo,
+    base = p.white,
+    text = p.black,
+
+    accent = p.blue,
+    accent_light = p.cyan,
+    syntax = p.magenta,
+
+    outline = p.gray0,
+    outline_light = p.gray2,
+    muted = p.gray1,
+    surface = p.gray3,
   }
 end
 

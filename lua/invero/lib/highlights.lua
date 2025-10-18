@@ -57,7 +57,7 @@ local function get_theme_modules(G)
   return modules
 end
 
-local function get_variant_colors(G)
+function M.get_variant_colors(G)
   local color_set = require('invero.colors.' .. G.variant)
   local color_tool = M.gen_color_tool()
   local palette = color_set.get_palette(color_tool)
@@ -92,9 +92,9 @@ function M.generate_highlights(G)
   local highlights = {}
 
   local modules = get_theme_modules(G)
-  local colors, color_tool = get_variant_colors(G)
+  local colors, color_tool = M.get_variant_colors(G)
   for _, module in ipairs(modules) do
-    local groups = module.get(colors)
+    local groups = module.get(colors, G.options)
     highlights = U.merge(highlights, groups)
   end
 
