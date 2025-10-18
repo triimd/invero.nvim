@@ -31,8 +31,7 @@ function M.get(c, opts)
     Question = { fg = c.text },
     Conceal = { fg = c.muted, italic = true },
 
-    -- StatusLine = { fg = c.outline, bg = bg },
-    WinSeparator = { fg = c.outline, bg = c.outline },
+    WinSeparator = { fg = c.outline, bg = bg },
     StatusLine = { fg = c.base, bg = c.outline, bold = true },
     StatusLineNC = { fg = c.surface, bg = c.outline },
     MsgArea = { fg = c.text, bg = bg },
