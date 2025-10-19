@@ -10,13 +10,13 @@ split = "#005fff"
 compose_cursor = "#d75f00"
 scrollbar_thumb = "#9e9e9e"
 
-copy_mode_active_highlight_bg = "#dadada"
-copy_mode_active_highlight_fg = "#d75f00"
-copy_mode_inactive_highlight_bg = "#eeeeee"
-copy_mode_inactive_highlight_fg = "#d75f00"
+copy_mode_active_highlight_bg = { Color = "#dadada" }
+copy_mode_active_highlight_fg = { Color = "#d75f00" }
+copy_mode_inactive_highlight_bg = { Color = "#eeeeee" }
+copy_mode_inactive_highlight_fg = { Color = "#d75f00" }
 
-ansi = ["#444444", "#ff0000", "#00af5f", "#d75f00", "#005fff", "#5f5f87", "#afd7ff", "#eeeeee"]
-brights = ["#444444", "#ff0000", "#00af5f", "#d75f00", "#005fff", "#5f5f87", "#afd7ff", "#eeeeee"]
+ansi = ["#444444", #ff0000", #00af5f", #d75f00", #005fff", #5f5f87", #afd7ff", #eeeeee"]
+brights = ["#444444", #ff0000", #00af5f", #d75f00", #005fff", #5f5f87", #afd7ff", #eeeeee"]
 
 [colors.tab_bar]
 inactive_tab_edge = "#ff0000"

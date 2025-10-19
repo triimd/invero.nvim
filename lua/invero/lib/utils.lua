@@ -20,8 +20,8 @@ end
 
 function M.template(str, tbl)
   return (
-    str:gsub('(%b{})', function(w)
-      return vim.tbl_get(tbl, unpack(vim.split(w:sub(2, -2), '.', { plain = true }))) or w
+    str:gsub('($%b{})', function(w)
+      return vim.tbl_get(tbl, unpack(vim.split(w:sub(3, -2), '.', { plain = true }))) or w
     end)
   )
 end
