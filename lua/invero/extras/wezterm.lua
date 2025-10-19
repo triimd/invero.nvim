@@ -17,6 +17,11 @@ split = "{blue}"
 compose_cursor = "{yellow}"
 scrollbar_thumb = "{muted}"
 
+copy_mode_active_highlight_bg = "{surface}"
+copy_mode_active_highlight_fg = "{yellow}"
+copy_mode_inactive_highlight_bg = "{base}"
+copy_mode_inactive_highlight_fg = "{yellow}"
+
 ansi = ["{black}", "{red}", "{green}", "{yellow}", "{blue}", "{magenta}", "{cyan}", "{white}"]
 brights = ["{black}", "{red}", "{green}", "{yellow}", "{blue}", "{magenta}", "{cyan}", "{white}"]
 
@@ -30,11 +35,11 @@ bg_color = "{black}"
 intensity = "Bold"
 
 [colors.tab_bar.inactive_tab]
-fg_color = "{surface}"
+fg_color = "{muted}"
 bg_color = "{black}"
 
 [colors.tab_bar.inactive_tab_hover]
-fg_color = "{muted}"
+fg_color = "{surface}"
 bg_color = "{black}"
 ]],
     colors

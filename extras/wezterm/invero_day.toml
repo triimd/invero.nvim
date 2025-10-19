@@ -10,6 +10,11 @@ split = "#005fff"
 compose_cursor = "#d75f00"
 scrollbar_thumb = "#9e9e9e"
 
+copy_mode_active_highlight_bg = "#dadada"
+copy_mode_active_highlight_fg = "#d75f00"
+copy_mode_inactive_highlight_bg = "#eeeeee"
+copy_mode_inactive_highlight_fg = "#d75f00"
+
 ansi = ["#444444", "#ff0000", "#00af5f", "#d75f00", "#005fff", "#5f5f87", "#afd7ff", "#eeeeee"]
 brights = ["#444444", "#ff0000", "#00af5f", "#d75f00", "#005fff", "#5f5f87", "#afd7ff", "#eeeeee"]
 
@@ -23,9 +28,9 @@ bg_color = "#444444"
 intensity = "Bold"
 
 [colors.tab_bar.inactive_tab]
-fg_color = "#dadada"
+fg_color = "#9e9e9e"
 bg_color = "#444444"
 
 [colors.tab_bar.inactive_tab_hover]
-fg_color = "#9e9e9e"
+fg_color = "#dadada"
 bg_color = "#444444"
