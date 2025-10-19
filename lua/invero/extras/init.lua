@@ -3,7 +3,7 @@ local utils = require('invero.lib.utils')
 local M = {}
 
 M.extras = {
-  -- wezterm = { ext = '.toml' },
+  wezterm = { ext = 'toml' },
   ghostty = {},
 }
 
