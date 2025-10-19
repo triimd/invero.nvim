@@ -22,8 +22,8 @@ copy_mode_active_highlight_fg = { Color = "${yellow}" }
 copy_mode_inactive_highlight_bg = { Color = "${base}" }
 copy_mode_inactive_highlight_fg = { Color = "${yellow}" }
 
-ansi = ["${black}", ${red}", ${green}", ${yellow}", ${blue}", ${magenta}", ${cyan}", ${white}"]
-brights = ["${black}", ${red}", ${green}", ${yellow}", ${blue}", ${magenta}", ${cyan}", ${white}"]
+ansi = ["${black}", "${red}", "${green}", "${yellow}", "${blue}", "${magenta}", "${cyan}", "${white}"]
+brights = ["${black}", "${red}", "${green}", "${yellow}", "${blue}", "${magenta}", "${cyan}", "${white}"]
 
 [colors.tab_bar]
 inactive_tab_edge = "${red}"
