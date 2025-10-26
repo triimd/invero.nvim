@@ -40,7 +40,7 @@ function M.write_to_cache(G, highlights)
   local file = assert(io.open(G.cache_path, 'w'))
   file:write(M.serialize(highlights))
   file:close()
-  vim.notify('invero: cache written to ' .. G.cache_path, vim.log.levels.INFO)
+  -- vim.notify('invero: cache written to ' .. G.cache_path, vim.log.levels.INFO)
 end
 
 function M.build_cache(G)

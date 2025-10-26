@@ -53,7 +53,7 @@ end
 function M.read_from_cache(G)
   local ok, highlights = pcall(dofile, G.cache_path)
   if not ok then
-    print('invero: cache not found or invalid, rebuilding…')
+    -- print('invero: cache not found or invalid, rebuilding…')
     highlights = require('invero.lib.cache').rebuild_cache(G)
   end
 
