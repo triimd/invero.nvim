@@ -47,6 +47,7 @@ local function get_theme_modules(G)
   }
 
   local available_integrations = require('invero.lib.integrations').get_enabled(G.options)
+  _G._integrations = available_integrations
   for _, integration in ipairs(available_integrations) do
     local ok_mod, mod = pcall(require, 'invero.groups.integrations.' .. integration)
     if ok_mod then
