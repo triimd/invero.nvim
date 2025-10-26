@@ -4,6 +4,7 @@ local M = {}
 
 M.extras = {
   wezterm = { ext = 'toml' },
+  kitty = { ext = 'conf' },
   ghostty = {},
 }
 
