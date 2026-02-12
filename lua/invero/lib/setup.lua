@@ -51,10 +51,15 @@ function M.apply_highlights(G, highlights)
 end
 
 function M.read_from_cache(G)
+  local cache = require('invero.lib.cache')
+  if cache.is_cache_stale(G) then
+    return cache.rebuild_cache(G)
+  end
+
   local ok, highlights = pcall(dofile, G.cache_path)
-  if not ok then
+  if not ok or type(highlights) ~= 'table' then
     -- print('invero: cache not found or invalid, rebuilding…')
-    highlights = require('invero.lib.cache').rebuild_cache(G)
+    highlights = cache.rebuild_cache(G)
   end
 
   return highlights

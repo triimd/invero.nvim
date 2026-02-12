@@ -49,7 +49,11 @@ The "day" variant uses these base colors:
 | Yellow  | 166   | `#d75f00` | Warnings, highlights     |
 | Blue    | 27    | `#005fff` | Primary accent           |
 | Magenta | 60    | `#5f5f87` | Syntax (keywords, types) |
+<<<<<<< HEAD
 | Cyan    | 153   | `#afd7ff` | Secondary accent         |
+=======
+| Cyan    | 24    | `#005f87` | Secondary accent         |
+>>>>>>> 31b29e2 (cache)
 | Black   | 238   | `#444444` | Base text                |
 | White   | 255   | `#eeeeee` | Base background          |
 
@@ -59,7 +63,11 @@ Semantic mappings:
 base         = white     (#eeeeee)  -- background
 text         = black     (#444444)  -- foreground
 accent       = blue      (#005fff)  -- primary accent
+<<<<<<< HEAD
 accent_light = cyan      (#afd7ff)  -- secondary accent
+=======
+accent_light = cyan      (#005f87)  -- secondary accent
+>>>>>>> 31b29e2 (cache)
 syntax       = magenta   (#5f5f87)  -- language constructs
 outline      = gray0     (#b2b2b2)  -- borders
 muted        = gray1     (#9e9e9e)  -- secondary text
