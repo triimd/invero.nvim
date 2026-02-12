@@ -29,8 +29,19 @@ function M.get(C)
     DiagnosticInfo = { fg = C.blue },
     DiagnosticWarn = { fg = C.yellow },
     DiagnosticError = { fg = C.red },
+    DiagnosticHint = { fg = C.cyan },
+    DiagnosticOk = { fg = C.green },
     DiagnosticDeprecated = { fg = C.muted },
+
+    DiagnosticSignError = { fg = C.red },
+    DiagnosticSignWarn = { fg = C.yellow },
+    DiagnosticSignInfo = { fg = C.blue },
+    DiagnosticSignHint = { fg = C.cyan },
+
     DiagnosticUnderlineError = { underline = true },
+    DiagnosticUnderlineWarn = { underline = true },
+    DiagnosticUnderlineInfo = { underline = true },
+    DiagnosticUnderlineHint = { underline = true },
   }
 end
 

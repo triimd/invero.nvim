@@ -2,6 +2,11 @@ local utils = require('invero.lib.utils')
 
 local M = {}
 
+local function get_plugin_root()
+  local source = debug.getinfo(1, 'S').source:sub(2)
+  return vim.fn.fnamemodify(source, ':h:h:h:h')
+end
+
 M.extras = {
   wezterm = { ext = 'toml' },
   kitty = { ext = 'conf' },
@@ -18,7 +23,7 @@ function M.setup()
   local invero = require('invero')
 
   for extra, metadata in pairs(M.extras) do
-    local extra_path = vim.fs.joinpath(vim.fn.getcwd(), 'extras', extra)
+    local extra_path = vim.fs.joinpath(get_plugin_root(), 'extras', extra)
     local port = require('invero.extras.' .. extra)
     for variant, _ in pairs(invero.variants) do
       local filename = extra_filename(invero.theme_name, metadata, variant)

@@ -59,7 +59,14 @@ local function get_theme_modules(G)
 end
 
 function M.get_variant_colors(G)
-  local color_set = require('invero.colors.' .. G.variant)
+  local ok, color_set = pcall(require, 'invero.colors.' .. G.variant)
+  if not ok then
+    vim.notify(
+      ("Invero: variant '%s' not found, falling back to 'day'"):format(G.variant),
+      vim.log.levels.WARN
+    )
+    color_set = require('invero.colors.day')
+  end
   local color_tool = M.gen_color_tool()
   local palette = color_set.get_palette(color_tool)
   local semantic_colors = color_set.get_colors(palette)

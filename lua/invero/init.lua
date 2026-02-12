@@ -5,18 +5,19 @@ local M = {
     variant = 'auto',
     background = {
       light = 'day',
-      dark = 'day',
+      dark = 'night',
     },
     transparent = false,
     integrations = {
       nvim_tree = true,
       telescope = true,
       treesitter = true,
+      gitsigns = true,
     },
   },
   theme_name = 'invero',
   cache_dir = vim.fs.joinpath(vim.fn.stdpath('cache'), '/invero'),
-  variants = { day = 1 },
+  variants = { day = 1, night = 2 },
 }
 
 function M.setup(options)
