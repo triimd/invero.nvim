@@ -1,0 +1,36 @@
+[colors]
+background = "#1c1c1c"
+foreground = "#d0d0d0"
+cursor_bg = "#5fafff"
+cursor_border = "#585858"
+cursor_fg = "#1c1c1c"
+selection_bg = "#262626"
+selection_fg = "#d0d0d0"
+split = "#5fafff"
+compose_cursor = "#ffd787"
+scrollbar_thumb = "#585858"
+
+copy_mode_active_highlight_bg = { Color = "#262626" }
+copy_mode_active_highlight_fg = { Color = "#ffd787" }
+copy_mode_inactive_highlight_bg = { Color = "#1c1c1c" }
+copy_mode_inactive_highlight_fg = { Color = "#ffd787" }
+
+ansi = ["#1c1c1c", "#ff5f5f", "#87d787", "#ffd787", "#5fafff", "#d7afff", "#87d7d7", "#d0d0d0"]
+brights = ["#1c1c1c", "#ff5f5f", "#87d787", "#ffd787", "#5fafff", "#d7afff", "#87d7d7", "#d0d0d0"]
+
+[colors.tab_bar]
+inactive_tab_edge = "#ff5f5f"
+background = "#1c1c1c"
+
+[colors.tab_bar.active_tab]
+fg_color = "#d0d0d0"
+bg_color = "#1c1c1c"
+intensity = "Bold"
+
+[colors.tab_bar.inactive_tab]
+fg_color = "#585858"
+bg_color = "#1c1c1c"
+
+[colors.tab_bar.inactive_tab_hover]
+fg_color = "#262626"
+bg_color = "#1c1c1c"

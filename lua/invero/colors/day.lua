@@ -7,7 +7,7 @@ function M.get_palette(c)
     yellow = c(166),
     blue = c(27),
     magenta = c(60),
-    cyan = c(24),
+    cyan = c(153),
     black = c(238),
     gray0 = c(245),
     gray1 = c(247),
