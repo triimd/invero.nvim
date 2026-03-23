@@ -29,6 +29,13 @@ function M.setup()
       local filename = extra_filename(invero.theme_name, metadata, variant)
       local file_path = vim.fs.joinpath(extra_path, filename)
       local colors = invero.get_colors({ variant = variant })
+      if colors.terminal then
+        local terminal = colors.terminal
+        colors.terminal = nil
+        for k, v in pairs(terminal) do
+          colors[k] = v
+        end
+      end
       colors = utils.normalize_colors(colors, 'gui')
       local content = port.generate(colors)
 

@@ -18,6 +18,12 @@ function M.get_palette(c)
   }
 end
 
+function M.get_terminal_colors(c)
+  return {
+    cyan = c(74), -- #5fafd7 - darker cyan readable on light backgrounds
+  }
+end
+
 function M.get_colors(p)
   return {
     base = p.white,

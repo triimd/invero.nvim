@@ -43,7 +43,6 @@ local function get_theme_modules(G)
   local modules = {
     require('invero.groups.editor'),
     require('invero.groups.syntax'),
-    require('invero.groups.terminal'),
   }
 
   local available_integrations = require('invero.lib.integrations').get_enabled(G.options)
@@ -71,7 +70,13 @@ function M.get_variant_colors(G)
   local palette = color_set.get_palette(color_tool)
   local semantic_colors = color_set.get_colors(palette)
 
-  return U.merge(palette, semantic_colors), color_tool
+  local colors = U.merge(palette, semantic_colors)
+
+  if color_set.get_terminal_colors then
+    colors.terminal = color_set.get_terminal_colors(color_tool)
+  end
+
+  return colors, color_tool
 end
 
 local function normalize_highlight_groups(groups)
@@ -105,6 +110,9 @@ function M.generate_highlights(G)
     local groups = module.get(colors, G.options)
     highlights = U.merge(highlights, groups)
   end
+
+  local terminal_colors = U.merge(colors, colors.terminal or {})
+  highlights = U.merge(highlights, require('invero.groups.terminal').get(terminal_colors))
 
   if G.options.highlights then
     local custom_highlights = G.options.highlights(colors, color_tool)
