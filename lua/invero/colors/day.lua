@@ -20,7 +20,7 @@ end
 
 function M.get_terminal_colors(c)
   return {
-    cyan = c(74), -- #5fafd7 - darker cyan readable on light backgrounds
+    cyan = c(38), -- #00afd7 - darker cyan readable on light backgrounds
   }
 end
 
