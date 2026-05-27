@@ -11,7 +11,7 @@ function M.get(c, opts)
     CursorLine = { bg = c.surface },
     CursorLineNr = { fg = c.accent, bold = true },
     LineNr = { fg = c.muted },
-    Visual = { bg = c.accent_light },
+    Visual = { bg = c.selection },
     MatchParen = { fg = c.accent, bg = c.accent_light, bold = true },
 
     -- Search

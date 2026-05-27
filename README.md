@@ -171,9 +171,8 @@ require('invero').setup({
 ## Cache
 
 Highlights are cached as serialized Lua for fast startup. The cache is stored in
-Neovim's standard cache directory. To clear it:
+Neovim's standard cache directory. To reload the theme after editing source files:
 
 ```vim
-:lua require('invero').invalidate_cache()
-:colorscheme invero
+:InveroReload day
 ```

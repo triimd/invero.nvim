@@ -7,8 +7,8 @@ function M.get_palette(c)
     yellow = c(166),
     blue = c(27),
     magenta = c(60),
-    -- cyan = c(153),
     cyan = c(38),
+    cyan_light = c(153),
     black = c(238),
     gray0 = c(245),
     gray1 = c(247),
@@ -32,6 +32,7 @@ function M.get_colors(p)
 
     accent = p.blue,
     accent_light = p.cyan,
+    selection = p.cyan_light,
     syntax = p.magenta,
 
     outline = p.gray0,

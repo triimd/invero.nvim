@@ -25,6 +25,7 @@ function M.get_colors(p)
 
     accent = p.blue,
     accent_light = p.gray2,
+    selection = p.gray2,
     syntax = p.magenta,
 
     outline = p.gray0,
