@@ -1,3 +1,10 @@
-#!/bin/env bash
+#!/usr/bin/env bash
+set -euo pipefail
 
-nvim --headless --cmd "set rtp^=$(pwd)" +"lua require('invero.extras').setup()" +qa
+root_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
+cd "$root_dir"
+
+INVERO_ROOT="$root_dir" nvim --headless --clean \
+  --cmd 'lua vim.opt.runtimepath:prepend(vim.env.INVERO_ROOT)' \
+  "+lua require('invero.extras').setup()" \
+  +qa

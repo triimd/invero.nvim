@@ -1,0 +1,112 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+root_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
+target=${1:-}
+variant=${2:-all}
+
+usage() {
+  printf '%s\n' 'Usage: ./scripts/install <kitty|wezterm|ghostty|herdr|pi|zellij|all> [variant|all]'
+}
+
+if [[ -z "$target" || "$target" == '-h' || "$target" == '--help' ]]; then
+  usage
+  [[ -n "$target" ]] && exit 0
+  exit 2
+fi
+
+install_generated() {
+  local extra=$1
+  local destination=$2
+  local matched=false
+  local file name
+
+  install -d "$destination"
+  shopt -s nullglob
+  for file in "$root_dir/extras/$extra"/*; do
+    name=${file##*/}
+    if [[ "$variant" == all || "$name" == *-"$variant" || "$name" == *-"$variant".* ]]; then
+      install -m 0644 "$file" "$destination/$name"
+      matched=true
+    fi
+  done
+  shopt -u nullglob
+
+  if ! "$matched"; then
+    printf 'No %s theme found for variant %s\n' "$extra" "$variant" >&2
+    exit 1
+  fi
+}
+
+install_herdr() {
+  local selected_variant=$variant
+  local config_home=${XDG_CONFIG_HOME:-"$HOME/.config"}
+  local config_file=${HERDR_CONFIG_FILE:-"$config_home/herdr/config.toml"}
+  local source_file temporary filtered
+  local -a source_files
+
+  [[ "$selected_variant" == all ]] && selected_variant=day
+  shopt -s nullglob
+  source_files=("$root_dir/extras/herdr"/*-"$selected_variant".toml)
+  shopt -u nullglob
+  if [[ ${#source_files[@]} -ne 1 ]]; then
+    printf 'Expected one Herdr theme for variant %s\n' "$selected_variant" >&2
+    exit 1
+  fi
+  source_file=${source_files[0]}
+
+  install -d "$(dirname "$config_file")"
+  temporary=$(mktemp "${config_file}.tmp.XXXXXX")
+  filtered=$(mktemp "${config_file}.filtered.XXXXXX")
+  trap 'rm -f "$temporary" "$filtered"' EXIT
+
+  if [[ -f "$config_file" ]]; then
+    cp -p "$config_file" "${config_file}.bak"
+    cp -p "$config_file" "$temporary"
+
+    if grep -Eq '^# BEGIN (invero herdr theme|invero\.nvim managed theme)$' "$temporary"; then
+      awk '
+        /^# BEGIN (invero herdr theme|invero\.nvim managed theme)$/ { managed = 1; next }
+        /^# END (invero herdr theme|invero\.nvim managed theme)$/ { managed = 0; next }
+        !managed { print }
+      ' "$temporary" > "$filtered"
+    else
+      awk '
+        /^\[theme(\..*)?\][[:space:]]*$/ { theme = 1; next }
+        /^\[/ { theme = 0 }
+        !theme { print }
+      ' "$temporary" > "$filtered"
+    fi
+    cat "$filtered" > "$temporary"
+  fi
+
+  printf '\n# BEGIN invero.nvim managed theme\n' >> "$temporary"
+  cat "$source_file" >> "$temporary"
+  printf '# END invero.nvim managed theme\n' >> "$temporary"
+  mv "$temporary" "$config_file"
+  rm -f "$filtered"
+  trap - EXIT
+}
+
+install_target() {
+  local name=$1
+  local config_home=${XDG_CONFIG_HOME:-"$HOME/.config"}
+
+  case "$name" in
+    kitty) install_generated kitty "${KITTY_THEME_DIR:-$config_home/kitty/themes}" ;;
+    wezterm) install_generated wezterm "${WEZTERM_COLOR_DIR:-$config_home/wezterm/colors}" ;;
+    ghostty) install_generated ghostty "${GHOSTTY_THEME_DIR:-$config_home/ghostty/themes}" ;;
+    zellij) install_generated zellij "${ZELLIJ_THEME_DIR:-$config_home/zellij/themes}" ;;
+    pi) install_generated pi "${PI_THEME_DIR:-$config_home/pi/themes}" ;;
+    herdr) install_herdr ;;
+    *) usage >&2; exit 2 ;;
+  esac
+}
+
+if [[ "$target" == all ]]; then
+  for target_name in kitty wezterm ghostty zellij pi herdr; do
+    install_target "$target_name"
+  done
+else
+  install_target "$target"
+fi

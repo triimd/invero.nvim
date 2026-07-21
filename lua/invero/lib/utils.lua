@@ -18,6 +18,21 @@ function M.normalize_colors(colors, to)
   return normalized
 end
 
+function M.blend(background, foreground, amount)
+  local function channel(color, offset)
+    return tonumber(color:sub(offset, offset + 1), 16)
+  end
+
+  local channels = {}
+  for _, offset in ipairs({ 2, 4, 6 }) do
+    local bg = channel(background, offset)
+    local fg = channel(foreground, offset)
+    channels[#channels + 1] = math.floor(bg + (fg - bg) * amount + 0.5)
+  end
+
+  return string.format('#%02x%02x%02x', unpack(channels))
+end
+
 function M.template(str, tbl)
   return (
     str:gsub('($%b{})', function(w)

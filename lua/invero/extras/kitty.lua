@@ -7,6 +7,8 @@ function M.generate(colors)
     [[
 # vim:ft=kitty
 
+dim_opacity 0.7
+
 background ${base}
 foreground ${text}
 cursor ${accent}

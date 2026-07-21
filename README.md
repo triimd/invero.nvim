@@ -10,7 +10,7 @@ Designed for daytime readability with high contrast and semantic color mapping.
 - Caching system for fast loading (serialized Lua)
 - Plugin detection (lazy.nvim, native packages, paq)
 - User-extensible highlights via `options.highlights(colors, color_tool)`
-- Terminal theme generation for Kitty, WezTerm, and Ghostty
+- Theme generation for Kitty, WezTerm, Ghostty, Herdr, Zellij, and the Pi coding agent
 
 ## Installation
 
@@ -49,11 +49,7 @@ The "day" variant uses these base colors:
 | Yellow  | 166   | `#d75f00` | Warnings, highlights     |
 | Blue    | 27    | `#005fff` | Primary accent           |
 | Magenta | 60    | `#5f5f87` | Syntax (keywords, types) |
-<<<<<<< HEAD
-| Cyan    | 153   | `#afd7ff` | Secondary accent         |
-=======
-| Cyan    | 24    | `#005f87` | Secondary accent         |
->>>>>>> 31b29e2 (cache)
+| Cyan    | 38    | `#00afd7` | Secondary accent         |
 | Black   | 238   | `#444444` | Base text                |
 | White   | 255   | `#eeeeee` | Base background          |
 
@@ -63,15 +59,11 @@ Semantic mappings:
 base         = white     (#eeeeee)  -- background
 text         = black     (#444444)  -- foreground
 accent       = blue      (#005fff)  -- primary accent
-<<<<<<< HEAD
-accent_light = cyan      (#afd7ff)  -- secondary accent
-=======
-accent_light = cyan      (#005f87)  -- secondary accent
->>>>>>> 31b29e2 (cache)
+accent_light = cyan      (#00afd7)  -- secondary accent
 syntax       = magenta   (#5f5f87)  -- language constructs
-outline      = gray0     (#b2b2b2)  -- borders
+outline      = gray0     (#8a8a8a)  -- borders
 muted        = gray1     (#9e9e9e)  -- secondary text
-surface      = gray3     (#ffffff)  -- elevated surfaces
+surface      = gray3     (#dadada)  -- elevated surfaces
 ```
 
 ## Structure
@@ -103,24 +95,47 @@ invero.nvim/
 │   │   └── utils.lua                # Template engine, utilities
 │   └── extras/
 │       ├── init.lua                 # Extra generation orchestrator
+│       ├── comments.lua             # Generated-file comment formatters
 │       ├── kitty.lua                # Kitty theme template
 │       ├── wezterm.lua              # WezTerm theme template
-│       └── ghostty.lua              # Ghostty theme template
-├── extras/                          # Pre-generated terminal configs
-│   ├── kitty/invero_day.conf
-│   ├── wezterm/invero_day.toml
-│   └── ghostty/invero_day
+│       ├── ghostty.lua              # Ghostty theme template
+│       ├── herdr.lua                # Herdr theme template
+│       ├── pi.lua                   # Pi coding agent theme template
+│       └── zellij.lua               # Zellij theme template
+├── extras/                          # Pre-generated theme configs
+│   ├── kitty/invero-day.conf
+│   ├── wezterm/invero-day.toml
+│   ├── ghostty/invero-day
+│   ├── herdr/invero-day.toml
+│   ├── pi/invero-day.json
+│   └── zellij/invero-day.kdl
 └── scripts/
-    └── build                        # Headless Nvim script to regenerate extras
+    ├── build                        # Regenerate extras
+    └── install                      # Install generated themes
 ```
 
 ## Terminal Themes
 
-Pre-generated configs live in `extras/`. To regenerate after palette changes:
+Pre-generated configs live in `extras/`. The build script resolves the repository root itself, so it can be run from any directory:
 
 ```bash
 ./scripts/build
 ```
+
+Installation is handled separately and supports each generated format:
+
+```bash
+./scripts/install kitty             # Install every Kitty variant
+./scripts/install pi day            # Install only the Pi day variant
+./scripts/install herdr night       # Select the Herdr night variant
+./scripts/install all day           # Install the day variant for every target
+```
+
+The variant defaults to `all`; Herdr defaults to `day` because its config can
+contain only one active custom theme. Installed filenames are identical to the
+files under `extras/`. Destination directories can be overridden with `KITTY_THEME_DIR`,
+`WEZTERM_COLOR_DIR`, `GHOSTTY_THEME_DIR`, `ZELLIJ_THEME_DIR`, `PI_THEME_DIR`,
+and `HERDR_CONFIG_FILE`.
 
 Or from within Neovim:
 
@@ -130,9 +145,36 @@ Or from within Neovim:
 
 Copy the generated file to your terminal's config directory:
 
-- **Kitty:** `cp extras/kitty/invero_day.conf ~/.config/kitty/themes/`
-- **WezTerm:** `cp extras/wezterm/invero_day.toml ~/.config/wezterm/colors/`
-- **Ghostty:** `cp extras/ghostty/invero_day ~/.config/ghostty/themes/`
+- **Kitty:** `cp extras/kitty/invero-day.conf ~/.config/kitty/themes/`
+- **WezTerm:** `cp extras/wezterm/invero-day.toml ~/.config/wezterm/colors/`
+- **Ghostty:** `cp extras/ghostty/invero-day ~/.config/ghostty/themes/`
+- **Herdr:** merge `extras/herdr/invero-day.toml` into `~/.config/herdr/config.toml`
+- **Zellij:** `cp extras/zellij/*.kdl ~/.config/zellij/themes/`
+
+Select a generated Zellij variant in `~/.config/zellij/config.kdl`:
+
+```kdl
+theme "invero-day"
+```
+
+Zellij also supports automatic host color-scheme selection:
+
+```kdl
+theme_light "invero-day"
+theme_dark "invero-night"
+```
+
+## Pi Coding Agent Themes
+
+Install either generated variant in Pi's global theme directory at
+`~/.config/pi/themes/`:
+
+```bash
+./scripts/install pi day
+# Or: ./scripts/install pi night
+```
+
+Then select `invero-day` or `invero-night` from `/settings`.
 
 ## Plugin Integrations
 
