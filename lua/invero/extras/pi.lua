@@ -98,7 +98,6 @@ function M.generate(colors, context)
     "thinkingHigh": "outlineLight",
     "thinkingXhigh": "outlineLight",
     "thinkingMax": "outlineLight",
-    "thinkingUltra": "outlineLight",
 
     "bashMode": "green"
   },
