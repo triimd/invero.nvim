@@ -92,12 +92,13 @@ function M.generate(colors, context)
     "syntaxPunctuation": "syntax",
 
     "thinkingOff": "outlineLight",
-    "thinkingMinimal": "muted",
-    "thinkingLow": "blue",
-    "thinkingMedium": "cyan",
-    "thinkingHigh": "syntax",
-    "thinkingXhigh": "yellow",
-    "thinkingMax": "red",
+    "thinkingMinimal": "outlineLight",
+    "thinkingLow": "outlineLight",
+    "thinkingMedium": "outlineLight",
+    "thinkingHigh": "outlineLight",
+    "thinkingXhigh": "outlineLight",
+    "thinkingMax": "outlineLight",
+    "thinkingUltra": "outlineLight",
 
     "bashMode": "green"
   },
