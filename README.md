@@ -8,34 +8,30 @@ Designed for daytime readability with high contrast and semantic color mapping.
 - Light theme optimized for readability
 - Xterm 256-color palette with GUI hex support
 - Caching system for fast loading (serialized Lua)
-- Plugin detection (lazy.nvim, native packages, paq)
+- Plugin integration detection through Neovim's native `vim.pack`
 - User-extensible highlights via `options.highlights(colors, color_tool)`
 - Theme generation for Kitty, WezTerm, Ghostty, Herdr, Zellij, and the Pi coding agent
 
+## Requirements
+
+- Neovim 0.12 or newer
+
 ## Installation
 
-With lazy.nvim:
+Register Invero with `vim.pack` before loading the colorscheme:
 
 ```lua
-{
-  'triimd/invero.nvim',
-  priority = 1000,
-  config = function()
-    require('invero').setup({
-      -- transparent = true,  -- optional: transparent background
-      -- highlights = function(colors, color_tool)
-      --   return { Custom = { fg = colors.blue } }
-      -- end,
-    })
-    vim.cmd('colorscheme invero')
-  end,
-}
-```
+vim.pack.add({
+  'https://github.com/triimd/invero.nvim',
+})
 
-For local development:
-
-```lua
-{ dir = '~/projects/flow/invero.nvim', priority = 1000 }
+require('invero').setup({
+  -- transparent = true,  -- optional: transparent background
+  -- highlights = function(colors, color_tool)
+  --   return { Custom = { fg = colors.blue } }
+  -- end,
+})
+vim.cmd('colorscheme invero')
 ```
 
 ## Color Palette
@@ -178,7 +174,8 @@ Then select `invero-day` or `invero-night` from `/settings`.
 
 ## Plugin Integrations
 
-Integrations are auto-detected and only applied if the plugin is installed:
+Integrations are auto-detected and only applied if the plugin was activated with
+`vim.pack.add()` before loading Invero:
 
 - **nvim-tree.lua** - File explorer highlights
 - **Telescope** - Search match highlighting
